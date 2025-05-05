@@ -13,5 +13,5 @@ WORKDIR /opt/app
 # Copy JAR file into image
 COPY ${artifact} app.jar
 
-# Run the app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Keep the container alive for Jenkins pipeline use
+CMD ["tail", "-f", "/dev/null"]
