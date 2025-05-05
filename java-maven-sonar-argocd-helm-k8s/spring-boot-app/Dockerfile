@@ -1,17 +1,14 @@
-# Use Eclipse Temurin JDK 17 base image
 FROM eclipse-temurin:17-jdk-alpine
 
-# Install Docker CLI and Maven
-RUN apk update && apk add --no-cache docker maven
+# Install Docker CLI, Maven, and Git
+RUN apk update && apk add --no-cache docker maven git
 
 # Set working directory
 WORKDIR /opt/app
 
-# ARG for Maven artifact
+# Optional: ARG for jar location if needed later
 ARG artifact=target/spring-boot-web.jar
-
-# Copy JAR file
 COPY ${artifact} app.jar
 
-# Default command
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Use CMD instead of ENTRYPOINT to avoid immediate execution during Jenkins pipeline
+CMD ["java", "-jar", "app.jar"]
