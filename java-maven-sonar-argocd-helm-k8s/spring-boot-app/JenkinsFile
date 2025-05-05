@@ -14,6 +14,9 @@ pipeline {
         script {
           docker.image('rajp41299/maven-docker-agent:v1').inside('--user root -v /var/run/docker.sock:/var/run/docker.sock') {
 
+            // Mark workspace as safe for Git
+            sh 'git config --global --add safe.directory /var/lib/jenkins/workspace/cap-2'
+
             // === Build and Test ===
             sh '''
               cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
@@ -44,8 +47,8 @@ pipeline {
             // === Update Deployment File ===
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
               sh '''
-                git config --global user.email "raj@example.com"
-                git config --global user.name "Raj Patel"
+                git config --global user.email "rajpatel.rp.rp93@gmail.com"
+                git config --global user.name "patelraj-41299"
                 sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                 git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml || true
                 git commit -m "Update deployment image to version ${BUILD_NUMBER}" || echo "No changes to commit"
