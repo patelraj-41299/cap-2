@@ -10,7 +10,7 @@ pipeline {
     SONAR_URL = "http://3.128.226.216:9000"
     GIT_REPO_NAME = "cap-2"
     GIT_USER_NAME = "patelraj-41299"
-    DOCKER_IMAGE = "abhishekf5/ultimate-cicd:${BUILD_NUMBER}"
+    DOCKER_IMAGE = "rajp41299/maven-docker-agent:${BUILD_NUMBER}"
   }
 
   stages {
