@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    SONAR_URL = "http://3.128.226.216:9000"
+    SONAR_URL = "http://3.138.117.193:9000"
     GIT_REPO_NAME = "cap-2"
     GIT_USER_NAME = "patelraj-41299"
     DOCKER_IMAGE = "rajp41299/springboot-app:${BUILD_NUMBER}"
