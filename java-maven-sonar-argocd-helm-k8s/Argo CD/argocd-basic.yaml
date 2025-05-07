@@ -1,10 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
-kind: ArgoCD
+kind: Application
 metadata:
-  name: example-argocd
-  labels:
-    example: basic
+  name: springboot-app
+  namespace: argocd
 spec:
-  server:
-    service:
-      type: NodePort
+  project: default
+  source:
+    repoURL: https://github.com/patelraj-41299/cap-2.git
+    targetRevision: main
+    path: java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
