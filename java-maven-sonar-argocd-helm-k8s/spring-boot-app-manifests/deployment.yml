@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: rajp41299/maven-docker-agent:replaceImageTag
+        image: rajp41299/maven-docker-agent:4
         ports:
         - containerPort: 8080
