@@ -1,18 +1,21 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: springboot-app
-  namespace: argocd
+  name: spring-boot-app
+  labels:
+    app: spring-boot-app
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/patelraj-41299/cap-2.git
-    targetRevision: main
-    path: java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-app
+  template:
+    metadata:
+      labels:
+        app: spring-boot-app
+    spec:
+      containers:
+      - name: spring-boot-app
+        image: rajp41299/springboot-app:replaceImageTag
+        ports:
+        - containerPort: 8080
